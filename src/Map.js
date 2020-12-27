@@ -1,31 +1,6 @@
-// import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
 import React from "react";
 import {render,ReactDom } from 'react-dom';
+import {MapView} from '@deck.gl/core';
 import ReactMapGL, { Marker, Popup , StaticMap , MapGL} from "react-map-gl";
 import {_MapContext as MapContext, NavigationControl} from 'react-map-gl';
 import {FullscreenControl} from 'react-map-gl';
@@ -40,19 +15,19 @@ import { Provider,connect } from 'react-redux';
 import { object } from "prop-types";
 import PlacesWithStandaloneSearchBox from './Searchbox'
 import EgoSearchbox from './EgoSearchBox'
-const MAPBOX_TOKEN = "Key in your token";
 
 
-const ICON_MAPPING = {
-  marker: {x: 0, y: 0, width: 80, height: 80, mask: true}
-};
+
+const MAPBOX_TOKEN = "pk.eyJ1Ijoic2hheXRodXJhbSIsImEiOiJja2J2N2l3ZGcwMWJtMm9veWFvYW9odjI3In0.f_qWlnfX1UfbUTIJGz6ubA";
+
+
+
 
 const INITIAL_VIEW_STATE = {
     longitude: 103.7443,
     latitude: 1.3851,
-
     zoom: 12,
-    maxZoom: 16,
+    maxZoom: 22,
     pitch: 0,
     bearing: 0,
     width: "80vw",
@@ -72,52 +47,6 @@ class Map extends React.Component {
     ego_list:[]
   }
 
-  // data = mdata['features']
-  // alldata = allstores['features']
-
-  // layers = [
-  //     new ScatterplotLayer({
-  //       INITIAL_VIEW_STATE,
-  //       id: 'scatterplot-layer',
-  //       data:this.alldata,
-  //       pickable: true,
-  //       opacity: 0.8,
-  //       stroked: true,
-  //       filled: true,
-  //       radiusScale: 6,
-  //       radiusMinPixels: 1,
-  //       radiusMaxPixels: 100,
-  //       lineWidthMinPixels: 1,
-  //       getPosition: d =>d.coordinates,
-  //       // getRadius: d => Math.pow(INITIAL_VIEW_STATE.zoom,),
-  //       getRadius: d =>(INITIAL_VIEW_STATE.zoom/6),
-  //       // eslint-disable-next-line
-  //       getFillColor: d => (d.store == "McDonalds " ? [252, 186, 3] : [31, 28, 28]),
-  //       getLineColor: d => [0, 0, 0],
-  //       onHover: info => this.handleHover(info),
-  //       onClick: info => this.handleClick(info.object)
-  //       }),
-  //       new IconLayer({
-  //         INITIAL_VIEW_STATE,
-  //         id: 'icon-layer',
-  //         data : this.state.searched_data,
-  //         pickable: true,
-  //         iconAtlas: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/icon-atlas.png',
-  //         iconMapping: ICON_MAPPING,
-  //         getIcon: d => 'marker',
-  //         sizeScale: 15,
-  //         getPosition: d => d.coordinates,
-  //         getSize: d => 5,
-  //         getColor: d => [252, 186, 3],
-  //         updateTriggers: {
-  //           getPosition: [
-  //             this.state.searched_data
-  //               ? this.state.searched_data.coordinates
-  //               : null
-  //           ]
-  //         }
-  //       })
-  // ]
 
 
   PS = (places_list) =>{
@@ -235,27 +164,7 @@ class Map extends React.Component {
 
 
     const layers = [
-        new ScatterplotLayer({
-          INITIAL_VIEW_STATE,
-          id: 'scatterplot-layer',
-          data:allstores['features'],
-          pickable: true,
-          opacity: 0.8,
-          stroked: true,
-          filled: true,
-          radiusScale: 6,
-          radiusMinPixels: 1,
-          radiusMaxPixels: 100,
-          lineWidthMinPixels: 1,
-          getPosition: d =>d.coordinates,
-          // getRadius: d => Math.pow(INITIAL_VIEW_STATE.zoom,),
-          getRadius: d =>(INITIAL_VIEW_STATE.zoom/4),
-          // eslint-disable-next-line
-          getFillColor: d => (d.store == "McDonalds" ? [252, 186, 3] : [31, 28, 28]),
-          getLineColor: d => [0, 0, 0],
-          getTooltip: ({object}) => object && object.name,
 
-          }),
           new ScatterplotLayer({
             INITIAL_VIEW_STATE,
             id: 'scatterplot-layer',
@@ -264,12 +173,11 @@ class Map extends React.Component {
             opacity: 0.8,
             stroked: true,
             filled: true,
-            radiusScale: 6,
-            radiusMinPixels: 1,
-            radiusMaxPixels: 100,
+            radiusScale:1/100,
+            radiusMinPixels:8,
+            radiusMaxPixels: 40,
             lineWidthMinPixels: 1,
             getPosition: d => d.coordinates,
-            getRadius: d =>(INITIAL_VIEW_STATE.zoom/4),
             getLineColor: d => [0, 0, 0],
             getTooltip: ({object}) => object && object.name,
             getFillColor: d => (  [255, 0, 0] ),
@@ -281,6 +189,7 @@ class Map extends React.Component {
               ]
             }
           }),
+
           new ScatterplotLayer({
             INITIAL_VIEW_STATE,
             id: 'scatterplot-layer',
@@ -289,12 +198,12 @@ class Map extends React.Component {
             opacity: 0.8,
             stroked: true,
             filled: true,
-            radiusScale: 6,
-            radiusMinPixels: 1,
-            radiusMaxPixels: 100,
+            radiusScale:1/100,
+            radiusMinPixels:8,
+            radiusMaxPixels: 40,
             lineWidthMinPixels: 1,
             getPosition: d => d.coordinates,
-            getRadius: d =>(INITIAL_VIEW_STATE.zoom/4),
+
             getLineColor: d => [0, 0, 0],
             getTooltip: ({object}) => object && object.name,
             getFillColor: d => (  [102, 255, 51] ),

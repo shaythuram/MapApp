@@ -1,15 +1,16 @@
 import React, { Component,useState,useEffect } from 'react';
 import {render} from 'react-dom';
 import Map from './Map.js'
-import InfoPicker from './InfoPicker.js'
+
 import { createStore } from 'redux'
 import { Provider,connect } from 'react-redux'
 import rootReducer from './reducers/rootReducer'
 import { Container, Row,  Col } from 'react-grid-system';
 import {  Button, Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
-import Picker from './Picker'
-import Chart from './Chart'
-import Chartt from './x'
+
+import Picker_Main from './Picker_Main'
+import Chart_Searched from './Chart_Searched'
+import Chart_Main from './Chart_Main'
 import PlacesWithStandaloneSearchBox from './Searchbox'
 
 const store = createStore(rootReducer);
@@ -17,10 +18,10 @@ const store = createStore(rootReducer);
 class App extends Component {
   
   state = {
-    DT: [ {Day  :'Monday' , Time : '00:00' }, ],
+    DT:  {Day  : undefined , Time : undefined }, 
     sd:[0],
     ego:[0],
-    X_Data:[0]
+    // X_Data:[0]
 
   }
 
@@ -52,7 +53,8 @@ class App extends Component {
     this.setState({
       DT:DayTime,
     })
-    console.log("DayTime State Set in App.JS", DayTime , this.state.DT)
+    console.log("DayTime State Set in App.JS")
+    console.log(this.state.DT)
   }
 
 
@@ -71,35 +73,28 @@ class App extends Component {
         d.pop()
         var old_sd = this.state.sd
         if(!(this.check_if_arrays_same(old_sd,d))){
-          console.log("ego State Set in App.JS", this.state.ego ,"Ego in APP.js")
+          console.log("sd State Set in App.JS", this.state.ego ,"sd in APP.js")
           this.setState({
             sd:d,
           })
         }
       }
-      var sd_data = this.state.sd
-      var e_data = this.state.ego
-      var X_data = []
-      console.log(sd_data.length, e_data.length , "lengths")
-      if (sd_data[0] !== 0  && e_data[0] !== 0){
-        X_data = sd_data.concat(e_data)
-        this.setState({
-          X_Data:X_data
-        })
-      }
-      else if (sd_data[0] !== 0  && e_data[0] === 0) {
-        X_data = sd_data
-        this.setState({
-          X_Data:X_data
-        })
-      }
-      else if (e_data[0] !== 0  && sd_data[0] === 0) {
-        X_data = e_data
-        this.setState({
-          X_Data:X_data
-        })
-      }
-
+      // var sd_data = this.state.sd
+      // var e_data = this.state.ego
+      // var X_data = []
+      // console.log(sd_data.length, e_data.length , "lengths")
+      // if (sd_data[0] !== 0  && e_data[0] !== 0){
+      //   X_data = sd_data.concat(e_data)
+      //   this.setState({
+      //     X_Data:X_data
+      //   })
+      // }
+      // else if (sd_data[0] !== 0  && e_data[0] === 0) {
+      //   X_data = sd_data
+      //   this.setState({
+      //     X_Data:X_data
+      //   })
+      // }
 
 
   }
@@ -117,34 +112,24 @@ class App extends Component {
                 <Navbar bg="light" expand="lg">
                     <Navbar.Brand href="#home">MapMe</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#link">Link</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                        </NavDropdown>
-                        </Nav>
 
-                    </Navbar.Collapse>
                 </Navbar>
                 
                 <Container fluid>
 
-                <Row debug >
-                    <Col sm={11.9} style={{height: "50vh"}} debug>  <Map TimeFilter={this.state.DT} Map={this.d}  >  </Map></Col>
-                    {/* <Col sm={3} style={{ backgroundColor:"dimgray", color: "white", height: "50vh", marginLeft: '5px'}} debug> <Picker Picker = {this.DTset}></Picker> </Col> */}
-                </Row>
-                <Row debug style={{  marginTop: '5px'}}>
-                <Col  style={{height: "190vh" }} debug>  <Chartt  Data={this.state.X_Data} >  </Chartt>  </Col>
-                {/* <Col sm={3} style={{ backgroundColor:"transparent", color: "white", height: "130vh", marginLeft: '5px'}} debug> </Col> */}
-                </Row>
+                      <Row debug >
+                          <Col sm={12} style={{height: "50vh"}} debug>  <Map TimeFilter={this.state.DT} Map={this.d}  >  </Map></Col>
+                      </Row>
+                      <Row debug style={{  marginTop: '1px'}}>
+                        <Col  sm={5} style={{aspectRatio:"3"}} debug> <Chart_Searched  Data={this.state.sd} DT ={this.state.DT} >  </Chart_Searched>   </Col>
+                        <Col sm={4} style={{ backgroundColor:"dimgray", color: "white", marginBottom: '0px'}} debug> <Picker_Main Picker_Main = {this.DTset}></Picker_Main> </Col>                 
+                      </Row>
 
-                </Container>  
+                      <Row debug style={{  marginTop: '1px'}}>
+                        <Col  sm={5} style={{aspectRatio:"3"}} debug> <Chart_Main  Data={this.state.ego} DT ={this.state.DT} >  </Chart_Main>   </Col>
+                        <Col sm={4} style={{ backgroundColor:"dimgray", color: "white", marginBottom: '0px'}} debug>  </Col>                 
+                      </Row> 
+                  </Container>  
 
         
       </div>
@@ -154,15 +139,20 @@ class App extends Component {
 
 export default App;
 
-// export function renderToDOM(container) {
 
-//   // render(<App />, container);
-//   render(<Provider store={store}><App /></Provider>, container);
 
-// }
 
-        
-        {/* <Map TimeFilter={this.state.DT}  > </Map>
-        <InfoPicker InfoPicker = {this.DTset} > </InfoPicker> */}
-        {/* <InfoPicker InfoPicker = {this.DTset} Place_ID={this.state.Place_ID} > </InfoPicker> */}
-        {/* picks time and sends it to TimeFilter in Shay */}
+// <Container fluid>
+
+// <Row debug >
+//     <Col sm={12} style={{height: "50vh"}} debug>  <Map TimeFilter={this.state.DT} Map={this.d}  >  </Map></Col>
+    
+// </Row>
+// <Row debug style={{  marginTop: '1px'}}>
+//   <Col  sm={3} style={{aspectRatio:"3"}} debug> <Chart_Searched  Data={this.state.sd} >  </Chart_Searched>   </Col>
+//   <Col  sm={3} style={{aspectRatio:"3"}} debug>  <Chart_Main Data={this.state.ego} >  </Chart_Main>    </Col>
+//   <Col sm={6} style={{ backgroundColor:"dimgray", color: "white", marginBottom: '0px'}} debug> <Picker Picker = {this.DTset}></Picker> </Col>                
+   
+// </Row>
+
+// </Container>  
