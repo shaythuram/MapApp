@@ -1,68 +1,20 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A mapping and analysis tool in development
 
-## Available Scripts
+Purpose: To identify stores in the vicinity(near your store or an area that you may want to open your new outlet at) and provide an overview of relative performance and customer flow. The metric used is the google Popular Times Data : https://support.google.com/business/answer/6263531?hl=en#:~:text=To%20determine%20popular%20times%2C%20wait,enough%20visits%20from%20these%20users.
 
-In the project directory, you can run:
+How To Use:
 
-### `yarn start`
+*Currently, initial View State of Mapbox is set over the wester territory of Singapore, zoom out / pan for a better overview. Setting inital view state of Mapbox based on Browser Location is to be worked on. The website works for data globally but you will have to zoom to your prefered locatioon to see thelocatin markers of the outlets you want to find.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+In the "Find A Store" search bar, input a store/franchise that you want to pit your store/franchise against and hit enter on your keyboard. This returns all outlets of the the store/franchise in the vicinity. If you do not have a particular store/franchise in mind, you could key in something like "Burger bars near me" or "Burger bars in Simei" , this would return the 20 most relevant stores pertaining to your search. (Note: The results from the searchbox is biased toward your browser location, it is only the viewport of the Mapbox Map that is not.)Said stores will be displayed as Red Dots on the Mapbox map, zoom out to have a better overvew. Wait <30s and the average Popular Time data will show up in the bar chart below.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+In the "Input Your Store" search bar, input you store/franchise and hit enter on your keyboard. This returns all outlets of the the store/franchise in the vicinity. As above ,if you do not have a particular store/franchise in mind, you could key in something like "Sushi bars near me" or "Japanese food in Hougang" , this would return the 20 most relevant stores pertaining to your search. Said stores will be displayed as Green Dots on the Mapbox map, zoom out to have a better overvew. Wait <30s and the average Popular Time data will show up in the bar chart below.
 
-### `yarn test`
+With this updated Bar Chart Rendered below, you will be able to see how the "Your Stores" fair against stores that (you wish to / will be) competing against. The metric being the Average Popular Times per week , of each store.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Updates Will Include:
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Display "Your Stores" Popular times as a percentage of the Total Popular Times , on a Bar Chart.
+Heatmap Graph.
+Site: https://map-2020.herokuapp.com/
