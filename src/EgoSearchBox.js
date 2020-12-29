@@ -11,7 +11,7 @@ const {
 const  EgoSearchBox = compose(
   withProps({
     googleMapURL:
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyCTj2k0Hf8b5Iav6W9cVbd4qE17a5l0SiE&v=3.exp&libraries=geometry,drawing,places",
+      "https://maps.googleapis.com/maps/api/js?key={API KEY HERE}&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `400px` }} />
   }),
