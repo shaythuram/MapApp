@@ -17,10 +17,13 @@ or "Burger bars in Simei" , this would return the 20 most relevant stores pertai
 3) With this updated Bar Chart Rendered below, you will be able to see how the "Your Stores" fair against stores that (you wish to / will be) competing against.
 The metric being the Average Popular Times per week , of each store.
 
-Updates Will Include:
-1) Filter Popular Time comparison based on Day and Hour Of Day.
-2) Display "Your Stores" Popular times as a percentage of the Total Popular Times , on a Bar Chart.
-3) Heatmap Graph.
+Update as of 12/01/2021:
+1) Filtering Popular Time comparison based on Day and Hour Of Day.
+
+Updates to come :
+1) Display "Your Stores" Popular times as a percentage of the Total Popular Times , on a Bar Chart.
+2) Heatmap Graph.
 
 
-Site: https://map-2020.herokuapp.com/
+Site: https://map-2020.herokuapp.com/  (CUrrently down due to over expenditure of my google cloud free credits please refer to this link instead 
+https://drive.google.com/file/d/1uPpqGg8JSLWH58xFp2bjnkEkQmEQS8Hi/view?usp=sharing)
