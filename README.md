@@ -29,5 +29,5 @@ Updates to come :
 *Full code is in my private repository
 
 
-Site: https://map-2020.herokuapp.com/  (CUrrently down due to over expenditure of my google cloud free credits please refer to this link instead 
+Site: https://map-2020.herokuapp.com/  (Currently down due to over expenditure of my google cloud free credits please refer to this link instead 
 https://drive.google.com/file/d/1uPpqGg8JSLWH58xFp2bjnkEkQmEQS8Hi/view?usp=sharing)
